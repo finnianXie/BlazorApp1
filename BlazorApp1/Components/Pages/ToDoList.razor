@@ -1,0 +1,63 @@
+
+@page "/todo"
+@using BlazorApp1.model
+@rendermode InteractiveServer
+<h3>ToDoList @todoList.Count(todo=>!todo.isDone)</h3>
+@* 这里要加上一些表格来进行展示。 *@
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">标题</th>
+        <th scope="col">内容</th>
+        <th scope="col">是否完成</th>
+    </tr>
+    </thead>
+    <tbody>
+     @foreach (var todo in todoList)
+     {
+         <tr class="table-success">
+             <th scope="row">@todo.id</th>
+             <td>@todo.title</td>
+             <td>@todo.content</td>
+             <td><input class="form-check-input" type="checkbox" value="1" id="flexCheckDefault" @bind="@todo.isDone"></td>
+         </tr>
+     }
+    </tbody>
+</table>
+
+<div class="container d-flex vh-50 justify-content-center align-content-center bg-light" style="width: 300px">
+    <div >
+        <div class="mb-1">
+            <label for="title" class="form-label">标题内容</label>
+            <input type="text" class="form-control" id="title" @bind="title" placeholder="今天要记录点什么？">
+        </div>
+        <div class="mb-1">
+            <label for="content" class="form-label">具体描述</label>
+            <textarea @bind="content" class="form-control" id="content" rows="3"></textarea>
+        </div>
+        <button @onclick="submit" class="btn btn-primary mb-3">提交</button>
+    </div>
+</div>
+<button @onclick="submit" class="btn btn-primary mb-3">点击</button>
+
+@code {
+    List<ToDo> todoList= [];
+    string title = "";
+    string content = "";
+    // TodoModel model = new TodoModel();
+    private void submit(EventArgs obj)
+    {
+        Console.WriteLine(title);
+        Console.WriteLine(content);
+        todoList.Add(new ToDo(todoList.Count+1,title,content));
+        Console.WriteLine($"count:{todoList.Count}");
+
+    }
+
+    private void test()
+    {
+        Console.WriteLine("title");
+    }
+
+}
