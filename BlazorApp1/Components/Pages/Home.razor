@@ -10,3 +10,12 @@ Welcome to your new app.
 <p>
     <Bind></Bind>
 </p>
+
+@code
+{
+    protected  override async Task OnInitializedAsync()
+    {
+        Console.WriteLine("这是onload函数");
+        //initialized  第一次加载的时候会调用这个函数
+    }
+}

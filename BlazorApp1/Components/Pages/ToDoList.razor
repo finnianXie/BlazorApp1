@@ -2,6 +2,7 @@
 @page "/todo"
 @using BlazorApp1.model
 @rendermode InteractiveServer
+@inject TodoModel TodoModelData
 <h3>ToDoList @todoList.Count(todo=>!todo.isDone)</h3>
 @* 这里要加上一些表格来进行展示。 *@
 <table class="table">
@@ -58,6 +59,12 @@
     private void test()
     {
         Console.WriteLine("title");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+       todoList= await TodoModelData.getAllDataAsync();
+       Console.WriteLine("数据加载完成");
     }
 
 }
